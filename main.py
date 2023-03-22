@@ -8,7 +8,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 L = logging.getLogger(__name__)
 
-url = "https://smn.conagua.gob.mx/webservices/index.php?method=1"
+url = "https://smn.conagua.gob.mx/webservices/index.php?method=3"
 # use pathlib to ensure proper behavior in any OS
 history_folder = Path(__file__).parent / "history"
 
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     L.info("downloading file")
     util.download_file(url, tmp_file)
 
-    new_file = history_folder / datetime.now().strftime("%y%m%d_%H.json")
+    new_file = history_folder / datetime.now().strftime("%Y%m%dT%H.json")
 
     # API unreliable: sometimes returns JSON and sometimes a zipped file
     if "gzip" in str(subprocess.check_output(["file", tmp_file])):
