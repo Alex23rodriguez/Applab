@@ -3,17 +3,22 @@ from pathlib import Path
 import gzip
 import json
 
+import logging
+
+L = logging.getLogger(__name__)
+
 
 def download_file(url: str, dest: str | Path, tries=10):
+    # try multiple times because API is unreliable
     for _ in range(tries):
-        return_code = call(["curl", url, "--output", dest])
+        return_code = call(["curl", url, "--silent", "--output", dest])
         if return_code == 0:
-            break
-    else:
-        # TODO log error downloading file
-        pass
+            return
+
+    L.error(f"Failed to download file! Tried {tries} times")
+    # TODO: handle download failure
 
 
-def gunzip_json(filepath: str | Path, output: str | Path):
+def gzip_to_json(filepath: str | Path):
     unzipped = gzip.open(filepath)
     return json.loads(unzipped.read())
