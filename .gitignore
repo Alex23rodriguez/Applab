@@ -1,2 +1,3 @@
 /venv
-history
+/history
+__pycache__
