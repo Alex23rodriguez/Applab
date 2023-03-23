@@ -15,7 +15,7 @@ if __name__ == "__main__":
     onehourago = (dtnow - timedelta(hours=1)).strftime("%Y%m%dT%H")
 
     L.info("reading latest data from API")
-    df = pd.read_json(current_data)
+    df = pd.read_csv(current_data)
 
     L.info("extracting values")
     # filter out unimportant data
@@ -39,7 +39,6 @@ if __name__ == "__main__":
         left_on=["Cve_Ent", "Cve_Mun"],
         right_on=["ides", "idmun"],
     )
-    print(ans.head())
 
     # save this data
     new_file = f"{tables_folder / now}.csv"

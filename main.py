@@ -4,6 +4,7 @@ import subprocess
 import util
 from pathlib import Path
 import logging
+import pandas as pd
 
 logging.basicConfig(level=logging.INFO)
 L = logging.getLogger(__name__)
@@ -19,7 +20,7 @@ if __name__ == "__main__":
     L.info("downloading file")
     util.download_file(url, tmp_file)
 
-    new_file = history_folder / datetime.now().strftime("%Y%m%dT%H.json")
+    new_file = history_folder / datetime.now().strftime("%Y%m%dT%H.csv")
 
     # API unreliable: sometimes returns JSON and sometimes a zipped file
     file_type = str(subprocess.check_output(["file", tmp_file]))
@@ -32,9 +33,15 @@ if __name__ == "__main__":
         L.error("received empty file!")
         # TODO: handle empty file case
         tmp_file.unlink()
+        exit()
     else:
         L.info("got json file")
-        tmp_file.rename(new_file)
+        jsn = json.load(open(tmp_file))
+        tmp_file.unlink()
+
+    # save as csv data
+    L.info("transforming json to csv file")
+    pd.DataFrame(jsn).to_csv(new_file, index=False)
 
     # add symlink 'current'
     sym = history_folder / "current"
