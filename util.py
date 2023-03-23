@@ -5,8 +5,6 @@ import json
 
 import logging
 
-L = logging.getLogger(__name__)
-
 
 def download_file(url: str, dest: str | Path, tries=10):
     # try multiple times because API is unreliable
@@ -15,7 +13,7 @@ def download_file(url: str, dest: str | Path, tries=10):
         if return_code == 0:
             return
 
-    L.error(f"Failed to download file! Tried {tries} times")
+    logging.error(f"Failed to download file! Tried {tries} times")
     # TODO: handle download failure
 
 
