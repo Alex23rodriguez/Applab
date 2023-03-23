@@ -1,18 +1,19 @@
 from datetime import datetime, timedelta
 from pathlib import Path
-import pandas
+import pandas as pd
 
 latest_data = Path(__file__) / "history" / "latest.json"
-
+tables_folder = Path(__file__) / "data_municipios"
 
 if __name__ == "__main__":
     dtnow = datetime.now()
     now = dtnow.strftime("%Y%m%dT%H")
     onehourago = (dtnow - timedelta(hours=1)).strftime("%Y%m%dT%H")
 
-    df: pandas.DataFrame = pandas.read_json(latest_data)
+    df: pd.DataFrame = pd.read_json(latest_data)
 
     # filter out unimportant data
+    # hloc: hora local
     df = df[(df["hloc"] == now) | (df["hloc"] == onehourago)]
 
     # filter out unused columns
@@ -20,3 +21,26 @@ if __name__ == "__main__":
 
     # group by state, municipio and get average of the other fields
     df_prom = df.groupby(["ides", "idmun"]).mean()
+
+    # reset index to go back to normal dataframe
+    df_prom = df_prom.reset_index()
+
+    # merge with other data
+    data = pd.read_csv(tables_folder / "data1.csv")
+
+    ans = pd.merge(
+        data,
+        df_prom,
+        how="inner",
+        left_on=["Cve_Ent", "Cve_Mun"],
+        right_on=["ides", "idmun"],
+    )
+
+    # save this data
+    new_file = f"{tables_folder / now}.csv"
+    ans.to_csv(new_file)
+
+    # add symlink 'latest'
+    sym = tables_folder / "latest"
+    sym.unlink(missing_ok=True)  # remove previous to avoid FileExistsError
+    sym.symlink_to(new_file)
