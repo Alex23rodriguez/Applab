@@ -14,7 +14,7 @@ history_folder = Path(__file__).parent / "history"
 
 
 if __name__ == "__main__":
-    # download latest data
+    # download current data
     tmp_file = history_folder / "tmp"
     L.info("downloading file")
     util.download_file(url, tmp_file)
@@ -36,7 +36,7 @@ if __name__ == "__main__":
         L.info("got json file")
         tmp_file.rename(new_file)
 
-    # add symlink 'latest'
-    sym = history_folder / "latest.json"
+    # add symlink 'current'
+    sym = history_folder / "current"
     sym.unlink(missing_ok=True)  # remove previous to avoid FileExistsError
     sym.symlink_to(new_file)
