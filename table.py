@@ -28,9 +28,6 @@ if __name__ == "__main__":
     # group by state, municipio and get average of the other fields
     df_prom = df.groupby(["ides", "idmun"]).mean()
 
-    # reset index to go back to normal dataframe
-    df_prom = df_prom.reset_index()
-
     L.info("merging with previous data")
     # merge with other data
     data = pd.read_csv(tables_folder / "data1.csv")
