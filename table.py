@@ -10,6 +10,8 @@ current_data = Path(__file__).parent / "history" / "current"
 tables_folder = Path(__file__).parent / "data_municipios"
 
 if __name__ == "__main__":
+    if not tables_folder.exists():
+        tables_folder.mkdir()
     dtnow = datetime.now()
     now = dtnow.strftime("%Y%m%dT%H")
     onehourago = (dtnow - timedelta(hours=1)).strftime("%Y%m%dT%H")

@@ -15,6 +15,8 @@ history_folder = Path(__file__).parent / "history"
 
 
 if __name__ == "__main__":
+    if not history_folder.exists():
+        history_folder.mkdir()
     # download current data
     tmp_file = history_folder / "tmp"
     L.info("downloading file")
