@@ -1,4 +1,4 @@
-from subprocess import call
+import subprocess
 from pathlib import Path
 import gzip
 import json
@@ -6,11 +6,14 @@ import json
 import logging
 
 
-def download_file(url: str, dest: str | Path, tries=10):
+def download_file(url: str, dest: Path, tries=10):
     # try multiple times because API is unreliable
-    for _ in range(tries):
-        return_code = call(["curl", url, "--silent", "--output", dest])
-        if return_code == 0:
+    for i in range(tries):
+        logging.debug(f"downloading file using curl, attempt {i}")
+        returncode = subprocess.run(["curl", url, "--output", dest]).returncode
+
+        # check that curl ran successfully AND actually received data
+        if returncode == 0 and dest.stat().st_size > 0:
             return
 
     logging.error(f"Failed to download file! Tried {tries} times")
