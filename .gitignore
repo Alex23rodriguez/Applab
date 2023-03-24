@@ -2,5 +2,5 @@
 __pycache__
 /history
 /data_municipios/*
-!data_municipios/data1.csv
+!/data_municipios/data1.csv
 /logs
