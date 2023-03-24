@@ -7,7 +7,7 @@ import logging
 import pandas as pd
 
 logging.basicConfig(
-    format="%(asctime)s:%(levelname)8s:%(module)6s:%(message)s",
+    format="%(asctime)s:%(levelname)8s:%(module)6s: %(message)s",
     datefmt="%y%m%dT%H%M",
     level=logging.INFO,
 )
@@ -31,6 +31,7 @@ if __name__ == "__main__":
     file_type = str(subprocess.check_output(["file", tmp_file]))
     if "gzip" in file_type:
         logging.info("got gzip file")
+        logging.info("extracting to json...")
         jsn = util.gzip_to_json(tmp_file)
         json.dump(jsn, open(new_file, "w"))
         tmp_file.unlink()  # remove tmp file
@@ -49,6 +50,5 @@ if __name__ == "__main__":
     pd.DataFrame(jsn).to_csv(new_file, index=False)
 
     # add symlink 'current'
-    sym = history_folder / "current"
-    sym.unlink(missing_ok=True)  # remove previous to avoid FileExistsError
-    sym.symlink_to(new_file)
+    util.symlink_to(history_folder / "current", new_file)
+    logging.info("done!")

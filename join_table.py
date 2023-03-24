@@ -4,8 +4,8 @@ import pandas as pd
 import logging
 
 logging.basicConfig(
-    format="%(asctime)s:%(levelname)8s:%(module)6s:%(message)s",
-    datefmt="%y%m%dT%H%M%S",
+    format="%(asctime)s:%(levelname)8s:%(module)6s: %(message)s",
+    datefmt="%y%m%dT%H%M",
     level=logging.INFO,
 )
 
@@ -52,6 +52,5 @@ if __name__ == "__main__":
     ans.to_csv(new_file, index=False)
 
     # add symlink 'current'
-    sym = tables_folder / "current"
-    sym.unlink(missing_ok=True)  # remove previous to avoid FileExistsError
-    sym.symlink_to(new_file)
+    symlink_to(tables_folder / "current", new_file)
+    logging.info("done!")
