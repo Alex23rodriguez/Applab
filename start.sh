@@ -1,3 +1,1 @@
-echo executing python scripts...
-python /usr/src/app/api.py && python /usr/src/app/join_table.py
-echo done!
+python /usr/src/app/python/api.py && python /usr/src/app/python/join_tables.py

@@ -8,13 +8,14 @@ logging.basicConfig(
     format="%(asctime)s:%(levelname)8s:%(module)6s: %(message)s",
     datefmt="%y%m%dT%H%M",
     level=logging.INFO,
-    filename=Path(__file__).parent / "logs" / "main.log",
+    filename=Path(__file__).parent.parent / "logs" / "main.log",
 )
 
-current_data = Path(__file__).parent / "history" / "current"
-tables_folder = Path(__file__).parent / "data_municipios"
+current_data = Path(__file__).parent.parent / "history" / "current"
+tables_folder = Path(__file__).parent.parent / "data_municipios"
 
 if __name__ == "__main__":
+    logging.info("--- running join_tables.py ---")
     if not tables_folder.exists():
         tables_folder.mkdir()
 

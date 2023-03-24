@@ -10,12 +10,12 @@ logging.basicConfig(
     format="%(asctime)s:%(levelname)8s:%(module)6s: %(message)s",
     datefmt="%y%m%dT%H%M",
     level=logging.INFO,
-    filename=Path(__file__).parent / "logs" / "main.log",
+    filename=Path(__file__).parent.parent / "logs" / "main.log",
 )
 
 url = "https://smn.conagua.gob.mx/webservices/index.php?method=3"
 # use pathlib to ensure proper behavior in any OS
-history_folder = Path(__file__).parent / "history"
+history_folder = Path(__file__).parent.parent / "history"
 
 
 if __name__ == "__main__":
