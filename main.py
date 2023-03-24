@@ -8,7 +8,7 @@ import pandas as pd
 
 logging.basicConfig(
     format="%(asctime)s:%(levelname)8s:%(module)6s:%(message)s",
-    datefmt="%y%m%dT%H%M%S",
+    datefmt="%y%m%dT%H%M",
     level=logging.INFO,
 )
 
@@ -38,7 +38,7 @@ if __name__ == "__main__":
         logging.error("received empty file!")
         # TODO: handle empty file case
         tmp_file.unlink()
-        exit()
+        exit(1)  # return 1 so next script won't be run
     else:
         logging.info("got json file")
         jsn = json.load(open(tmp_file))
