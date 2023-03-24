@@ -1,1 +1,1 @@
-* * * * * cd /usr/src/app && python api.py && python join_table.py
+*/3 * * * * sh /usr/src/app/start.sh >> /var/log/cron.log 2&>1
