@@ -25,3 +25,9 @@ def download_file(url: str, dest: Path, tries=10):
 def gzip_to_json(filepath: str | Path):
     unzipped = gzip.open(filepath)
     return json.loads(unzipped.read())
+
+
+def symlink_to(symlink: Path, target_file: Path | str):
+    # remove previous to avoid FileExistsError
+    symlink.unlink(missing_ok=True)
+    symlink.symlink_to(target_file)
