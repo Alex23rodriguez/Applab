@@ -1,4 +1,3 @@
 echo executing python scripts...
-# cd to this directory
-cd $(dirname $0)
-python api.py && python join_table.py
+python /usr/src/app/api.py && python /usr/src/app/join_table.py
+echo done!

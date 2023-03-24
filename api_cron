@@ -1,1 +1,1 @@
-*/3 * * * * sh /usr/src/app/start.sh >> /var/log/cron.log 2&>1
+30 * * * * sh /usr/src/app/start.sh >> /var/log/cron.log 2&>1

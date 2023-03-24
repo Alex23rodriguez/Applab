@@ -10,7 +10,7 @@ logging.basicConfig(
     format="%(asctime)s:%(levelname)8s:%(module)6s: %(message)s",
     datefmt="%y%m%dT%H%M",
     level=logging.INFO,
-    filename="logs/main.log",
+    filename=Path(__file__).parent / "logs" / "main.log",
 )
 
 url = "https://smn.conagua.gob.mx/webservices/index.php?method=3"
