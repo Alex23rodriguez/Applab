@@ -10,6 +10,7 @@ logging.basicConfig(
     format="%(asctime)s:%(levelname)8s:%(module)6s: %(message)s",
     datefmt="%y%m%dT%H%M",
     level=logging.INFO,
+    filename="logs/main.log",
 )
 
 url = "https://smn.conagua.gob.mx/webservices/index.php?method=3"
@@ -18,6 +19,7 @@ history_folder = Path(__file__).parent / "history"
 
 
 if __name__ == "__main__":
+    logging.info("--- running api.py ---")
     if not history_folder.exists():
         history_folder.mkdir()
     # download current data

@@ -8,6 +8,7 @@ logging.basicConfig(
     format="%(asctime)s:%(levelname)8s:%(module)6s: %(message)s",
     datefmt="%y%m%dT%H%M",
     level=logging.INFO,
+    filename="logs/main.log",
 )
 
 current_data = Path(__file__).parent / "history" / "current"
