@@ -91,6 +91,13 @@ docker-compose up
 
 - para detener el funcionamiento, ejecutar `docker-compose down`
 
+### cambiar de modelo
+Experimentar con la otra opción (por ejemplo, `persist`->`single_exec`) ejecutar el siguiente commando para jalar la rama remota:
+```
+git checkout --track origin/single_exec
+```
+Luego, puede cambiarse fácilmente de modelo utilizando `git switch persist` o `git switch single_exec`
+
 ---
 
 ## Decisiones
@@ -167,7 +174,7 @@ Si esta versión inicial fuera elegida para sequir siendo desarrollada por un eq
    Dependiendo de los requisitos, debe planearse anticipadamente cuál será la estructura y alcance del proyecto, ya que intentar modificar el "esqueleto" más adelante se vuelve mucho más complicado.
 
 3. Implementar mejoras.
-   Las mejoras ya mencionadas permitirían que este proceso escale más eficientemente. En particular, debe planearse de antemano cómo será el formato y diseño de los logs para intentar agilizar la búsqueda de cuellos de botella y bugs. También debe investigarse el API para intentar averiguar cuándo / por qué falla y cómo se va lidiar con esas sitauciones.
+   Las mejoras ya mencionadas permitirían que este proceso escale más eficientemente. En particular, debe planearse de antemano cómo será el formato y diseño de los logs para intentar agilizar la búsqueda de cuellos de botella y bugs. También debe investigarse el API para intentar averiguar cuándo / por qué falla y cómo se va lidiar con esas sitauciones. Además, es posible implementar un sistema de alertas (por ejemplo, por correo o por un bot de telegram) para notificar al equipo cada que la descarga de datos no fue exitosa, o si se produjo algún error.
 
 4. Desempeño y costos
    Actualmente se trata de un proceso bastante ligero en términos de complejidad computacional. Sin embargo, si esto fuera a cambiar debe pensarse en dónde se va a correr (desde una Raspberry Pi a AWS) y los costos que implican los distintos servicios, así como el costo temporal relacionado a qué servicios se desarrollarán "in house" contra utilizar un SaaS, IaaS, etc.
