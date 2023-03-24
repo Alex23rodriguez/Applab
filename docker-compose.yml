@@ -1,0 +1,7 @@
+version: "3"
+services:
+  applab:
+    build: .
+    volumes:
+      - ./history:/usr/src/app/history
+      - ./data_municipios:/usr/src/app/data_municipios
