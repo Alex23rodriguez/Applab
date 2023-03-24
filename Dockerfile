@@ -10,4 +10,4 @@ COPY . .
 
 ENV TZ=America/Mexico_City
 
-CMD ["/bin/sh", "-c", "python api.py && python join_tables.py"]
+CMD ["/bin/sh", "-c", "python python/api.py && python python/join_tables.py"]
