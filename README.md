@@ -58,10 +58,10 @@ agregar a crontab para que se corra cada hora:
 - si el crontab está vacío: (checar con `crontab -l`)
 
 ```bash
-echo "30 * * * * docker-compose up" | crontab
+echo "30 * * * * cd $(pwd) && docker-compose up" | crontab
 ```
 
-- si no está vacío, correr `crontab -e` y agregar la línea `30 * * * * docker-compose up`
+- si no está vacío, correr `crontab -e` y agregar la línea `30 * * * * cd </ruta/al/repositorio> && docker-compose up`
 
 - para ejecutar una sóla vez (por ejemplo, si se quiere hacer debugging), corrase `docker-compose up`
 
@@ -92,10 +92,13 @@ docker-compose up
 - para detener el funcionamiento, ejecutar `docker-compose down`
 
 ### cambiar de modelo
+
 Experimentar con la otra opción (por ejemplo, `persist`->`single_exec`) ejecutar el siguiente commando para jalar la rama remota:
+
 ```
 git checkout --track origin/single_exec
 ```
+
 Luego, puede cambiarse fácilmente de modelo utilizando `git switch persist` o `git switch single_exec`
 
 ---
